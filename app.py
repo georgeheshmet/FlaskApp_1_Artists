@@ -13,18 +13,22 @@ import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
 from forms import *
+import os
 import datetime
+from dotenv import load_dotenv
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
 
 app = Flask(__name__)
+load_dotenv()
 moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
 migrate = Migrate(app,db)
 # TODO: connect to a local postgresql database
+#load variables from .env file
 
 #----------------------------------------------------------------------------#
 # Models.
@@ -77,10 +81,11 @@ class Shows(db.Model):
     
     
 
-# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
+
 
 #----------------------------------------------------------------------------#
 # Filters.
+# not my work
 #----------------------------------------------------------------------------#
 
 def format_datetime(value, format='medium'):
@@ -236,9 +241,6 @@ def create_venue_submission():
   # TODO: modify data to be the data object returned from db insertion
   
 
-  # TODO: on unsuccessful db insert, flash an error instead.
-  # e.g., flash('An error occurred. Venue ' + data.name + ' could not be listed.')
-  # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
     except:
       flash('An error occurred. Venue ' +request.form['name']+"could not be listed")
       db.session.rollback()

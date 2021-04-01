@@ -11,4 +11,4 @@ DEBUG = True
 
 # TODO IMPLEMENT DATABASE URL
 SQLALCHEMY_TRACK_MODIFICATIONS=False
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost:5432/fyurDb'
+SQLALCHEMY_DATABASE_URI = os.getenv('databaseUrl')
